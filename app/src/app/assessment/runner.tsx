@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   ADAPTIVE_ITEM_COUNT,
   createAdaptiveSession,
@@ -10,7 +10,7 @@ import {
 } from "@/lib/adaptive";
 import { bankItem } from "@/lib/item-bank";
 import { DIMENSIONS } from "@/lib/scoring";
-import { saveRun } from "@/lib/storage";
+import { clearProgress, loadProgress, saveProgress, saveRun } from "@/lib/storage";
 
 const DIM_NAME: Record<string, string> = Object.fromEntries(
   DIMENSIONS.map((dimension) => [dimension.key, dimension.name]),
@@ -20,6 +20,20 @@ export function Runner() {
   const router = useRouter();
   const [session, setSession] = useState<AdaptiveSession | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
+  // `restored` is only used to tell the candidate why they are mid-test.
+  const [restored, setRestored] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
+
+  // Resume an interrupted run. Reading storage during render would break the
+  // static prerender, so this runs once after mount.
+  useEffect(() => {
+    const saved = loadProgress();
+    if (saved) {
+      setSession(saved);
+      setRestored(true);
+    }
+    setHydrated(true);
+  }, []);
 
   const submit = useCallback(() => {
     if (!session || !selected) return;
@@ -31,15 +45,30 @@ export function Runner() {
         answers: updated.answers,
         finishedAt: new Date().toISOString(),
       });
+      clearProgress();
       router.push("/results");
       return;
     }
+    saveProgress(updated);
     setSession(updated);
     setSelected(null);
+    setRestored(false);
   }, [router, selected, session]);
 
+  // Hold the frame until storage has been read, so a resumable run never
+  // flashes the intro screen and invites the candidate to start over.
+  if (!hydrated) return <p className="muted">Loading your assessment…</p>;
+
   if (!session) {
-    return <AdaptiveIntro onStart={() => setSession(createAdaptiveSession())} />;
+    return (
+      <AdaptiveIntro
+        onStart={() => {
+          const fresh = createAdaptiveSession();
+          saveProgress(fresh);
+          setSession(fresh);
+        }}
+      />
+    );
   }
 
   const current = bankItem(session.currentItemId);
@@ -51,7 +80,7 @@ export function Runner() {
       <h1 className="sr-h1">Adaptive AI fluency assessment</h1>
       <div className="progress">
         <div className="progress-head">
-          <span><strong>Question {number}</strong> of {ADAPTIVE_ITEM_COUNT}</span>
+          <span><strong>Question {number}</strong> of {ADAPTIVE_ITEM_COUNT}{restored ? " · resumed" : ""}</span>
           <span>{DIM_NAME[current.section]} · Adaptive path</span>
         </div>
         <div className="bar" role="progressbar" aria-valuenow={number} aria-valuemin={1} aria-valuemax={ADAPTIVE_ITEM_COUNT} aria-label="Progress through the assessment">

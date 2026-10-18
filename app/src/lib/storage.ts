@@ -1,6 +1,8 @@
+import type { AdaptiveSession } from "./adaptive";
 import type { AnswerMap, FormId } from "./types";
 
 export const RUN_KEY = "ai-fluency-run-v1";
+export const PROGRESS_KEY = "ai-fluency-progress-v1";
 
 export interface StoredRun {
   mode?: "adaptive";
@@ -52,6 +54,52 @@ export function loadRun(): StoredRun | null {
 export function clearRun(): void {
   try {
     window.sessionStorage.removeItem(RUN_KEY);
+  } catch {
+    /* nothing to clear */
+  }
+}
+
+/**
+ * In-progress persistence. Without this a refresh, an accidental back
+ * navigation, or a phone locking mid-test silently discards every answer and
+ * drops the candidate back on the intro screen. The run itself is only written
+ * on completion, so this is a separate key with its own lifetime: written after
+ * every answer, cleared the moment the run finishes or is restarted.
+ */
+export function saveProgress(session: AdaptiveSession): void {
+  try {
+    window.sessionStorage.setItem(PROGRESS_KEY, JSON.stringify(session));
+  } catch {
+    /* storage unavailable; the run still works in memory for this tab */
+  }
+}
+
+export function loadProgress(): AdaptiveSession | null {
+  try {
+    const raw = window.sessionStorage.getItem(PROGRESS_KEY);
+    if (!raw) return null;
+    const parsed: unknown = JSON.parse(raw);
+    if (typeof parsed !== "object" || parsed === null) return null;
+    const s = parsed as AdaptiveSession;
+    const shapeOk =
+      typeof s.seed === "string" &&
+      typeof s.currentItemId === "string" &&
+      Array.isArray(s.administered) &&
+      typeof s.answers === "object" &&
+      s.answers !== null &&
+      typeof s.targets === "object" &&
+      s.targets !== null;
+    // A completed session belongs to the run, not to progress.
+    if (!shapeOk || s.complete) return null;
+    return s;
+  } catch {
+    return null;
+  }
+}
+
+export function clearProgress(): void {
+  try {
+    window.sessionStorage.removeItem(PROGRESS_KEY);
   } catch {
     /* nothing to clear */
   }

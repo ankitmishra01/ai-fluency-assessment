@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { scoreAdaptive } from "@/lib/adaptive";
 import { bankItem } from "@/lib/item-bank";
 import { BANDS, bandNote, DIMENSION_MAX, getForm, LEVEL_LABELS, TOTAL_MAX, score } from "@/lib/scoring";
-import { clearRun, loadRun, type StoredRun } from "@/lib/storage";
+import { clearProgress, clearRun, loadRun, type StoredRun } from "@/lib/storage";
 import type { DimensionScore, Result } from "@/lib/types";
 
 function dimensionStatus(dimension: DimensionScore, result: Result): string {
@@ -108,7 +108,7 @@ function Scored({ run }: { run: StoredRun }) {
         </div>
       </details>
 
-      <div className="q-nav result-actions"><Link href="/assessment" className="btn ghost" onClick={() => clearRun()}>Take a new adaptive path</Link><Link href="/methodology" className="btn ghost">How this was scored</Link></div>
+      <div className="q-nav result-actions"><Link href="/assessment" className="btn ghost" onClick={() => { clearRun(); clearProgress(); }}>Take a new adaptive path</Link><Link href="/methodology" className="btn ghost">How this was scored</Link></div>
     </>
   );
 }
