@@ -51,6 +51,10 @@ function Scored({ run }: { run: StoredRun }) {
 
   return (
     <>
+      {run.sample ? (
+        <div className="development-notice"><strong>This is a sample profile.</strong> It was produced by running the real scoring over a fixed set of answers, so every number below is computed, not mocked up. <Link href="/assessment">Take the assessment yourself</Link> to generate your own.</div>
+      ) : null}
+
       <div className="development-notice"><strong>For learning and development only.</strong> This profile is meant to guide training and coaching, not hiring, promotion, or performance evaluation.</div>
 
       <section className="result-hero" aria-labelledby="result-level">

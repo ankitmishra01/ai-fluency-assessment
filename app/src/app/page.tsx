@@ -24,6 +24,9 @@ export default function Home() {
             <Link href="/assessment" className="btn hero-cta">
               Take the assessment
             </Link>
+            <Link href="/sample" className="btn ghost hero-cta">
+              See a sample profile
+            </Link>
             <Link href="/methodology" className="btn ghost hero-cta">
               How it is scored
             </Link>

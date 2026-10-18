@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import {
@@ -129,7 +130,11 @@ function AdaptiveIntro({ onStart }: { onStart: () => void }) {
         <div><strong>20–25</strong><span>minutes</span></div>
       </div>
       <div className="callout"><p><strong>Answers become final when submitted.</strong> Like other adaptive tests, changing an earlier response would change the questions selected afterward. There is no penalty for taking time to think.</p></div>
-      <button type="button" onClick={onStart}>Begin adaptive assessment</button>
+      <div className="q-nav adaptive-nav" style={{ borderTop: "none", paddingTop: 0 }}>
+        <button type="button" onClick={onStart}>Begin adaptive assessment</button>
+        <span className="spacer" />
+        <Link href="/sample" className="btn ghost">See a sample profile instead</Link>
+      </div>
     </section>
   );
 }

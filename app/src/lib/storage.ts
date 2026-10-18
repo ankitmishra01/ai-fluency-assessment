@@ -10,6 +10,8 @@ export interface StoredRun {
   itemIds?: string[];
   answers: AnswerMap;
   finishedAt: string;
+  /** True for the published demonstration profile, so the result can say so. */
+  sample?: boolean;
 }
 
 /**

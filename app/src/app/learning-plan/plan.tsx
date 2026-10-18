@@ -23,6 +23,7 @@ export function LearningPlanReport() {
     <>
       <div className="plan-toolbar no-print"><Link href="/results" className="btn ghost">Back to results</Link><button type="button" onClick={() => window.print()}>Print or save PDF</button></div>
       <header className="plan-heading"><div><p className="eyebrow">AI fluency development plan</p><h1>Your six-week learning plan</h1></div><div className="plan-score"><strong>{result.total}</strong><span>out of 800 · {LEVEL_LABELS[result.band]}</span></div></header>
+      {run.sample ? <div className="development-notice"><strong>This is a sample plan</strong>, generated from the sample profile by the same code a real result uses.</div> : null}
       <div className="development-notice"><strong>For learning and development only.</strong> Use this plan to guide practice and manager support. Do not use it for hiring, promotion, or performance evaluation.</div>
       <section className="plan-summary"><div><p className="eyebrow">Why these priorities</p><h2>Your plan follows the clearest score gaps</h2><p>{plan.rationale}</p></div><dl>{result.dimensions.map((dimension) => <div key={dimension.key}><dt>{dimension.name}</dt><dd>{dimension.score} / {DIMENSION_MAX}</dd></div>)}</dl></section>
       <section className="plan-phases" aria-label="Six-week learning schedule">
