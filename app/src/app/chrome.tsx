@@ -15,8 +15,11 @@ export function Header() {
     <header className="top">
       <div className="top-inner">
         <Link href="/" className="logo">
-          <strong>AI Fluency Assessment</strong>
-          <span>Ankit Mishra</span>
+          <span className="logo-mark" aria-hidden="true">AM</span>
+          <span className="logo-copy">
+            <strong>AI Fluency Assessment</strong>
+            <span>Methodology by Ankit Mishra</span>
+          </span>
         </Link>
         <nav aria-label="Primary">
           {TABS.map((t) => {
@@ -34,7 +37,7 @@ export function Header() {
             );
           })}
         </nav>
-        <span className="demo">Prototype</span>
+        <span className="demo">Pilot assessment</span>
       </div>
     </header>
   );
@@ -45,8 +48,8 @@ export function Footer() {
     <footer>
       <div className="foot-inner">
         <p>
-          Prototype built by Ankit Mishra. Pilot item bank, illustrative scoring
-          bands. Not a validated instrument.
+          Designed and authored by Ankit Mishra for workplace learning and
+          development. Pilot item bank; not a validated instrument.
         </p>
         <div className="foot-links">
           <Link href="/">Overview</Link>

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function AssessmentPage() {
   return (
-    <main>
+    <main id="main-content">
       <div className="pagehead">
         <span>ASSESSMENT</span>
       </div>

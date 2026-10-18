@@ -22,7 +22,7 @@ export default function MethodologyPage() {
     Object.values(c).reduce((x, y) => x + y, 0);
 
   return (
-    <main>
+    <main id="main-content" className="methodology-page">
       <div className="pagehead">
         <span>METHODOLOGY</span>
       </div>
@@ -34,8 +34,17 @@ export default function MethodologyPage() {
         one that matters.
       </p>
 
+      <nav className="methodology-nav" aria-label="Methodology sections">
+        <a href="#item-bank">Item bank</a>
+        <a href="#scoring">Scoring</a>
+        <a href="#bands">Bands</a>
+        <a href="#validation">Validation</a>
+        <a href="#limitations">Limitations</a>
+        <a href="#data">Data handling</a>
+      </nav>
+
       <div className="prose">
-        <h2>The item bank</h2>
+        <h2 id="item-bank">The item bank</h2>
         <p>
           Two parallel forms, A and B, written by hand for working
           professionals rather than for engineers. Each form covers the same
@@ -94,7 +103,7 @@ export default function MethodologyPage() {
       </p>
 
       <div className="prose">
-        <h2>How a score is computed</h2>
+        <h2 id="scoring">How a score is computed</h2>
         <p>
           Each dimension is worth {DIMENSION_MAX} points regardless of how many
           items sit behind it. A dimension score is
@@ -149,7 +158,7 @@ export default function MethodologyPage() {
           take a difference of.
         </p>
 
-        <h2>Band cut points</h2>
+        <h2 id="bands">Band cut points</h2>
         <p>
           The four band names come from the source test documents. The numeric
           boundaries below were set by judgment on the {TOTAL_MAX}-point scale
@@ -196,7 +205,7 @@ export default function MethodologyPage() {
       </p>
 
       <div className="prose">
-        <h2>What would make this a real instrument</h2>
+        <h2 id="validation">What would make this a real instrument</h2>
         <p>
           What exists today is a well-specified prototype on a pilot item bank.
           Four things stand between it and a measure that could carry a decision
@@ -258,7 +267,7 @@ export default function MethodologyPage() {
           like these.
         </p>
 
-        <h2>Known limitations in this build</h2>
+        <h2 id="limitations">Known limitations in this build</h2>
         <ul className="clean">
           <li>
             <strong>
@@ -317,7 +326,7 @@ export default function MethodologyPage() {
           </li>
         </ul>
 
-        <h2>Data handling</h2>
+        <h2 id="data">Data handling</h2>
         <p>
           There is no backend, no database, no account system, no analytics and
           no cookies. The assessment runs entirely in the browser; answers are

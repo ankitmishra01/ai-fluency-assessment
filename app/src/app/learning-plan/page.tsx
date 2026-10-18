@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function LearningPlanPage() {
-  return <main className="plan-page"><LearningPlanReport /></main>;
+  return <main id="main-content" className="plan-page"><LearningPlanReport /></main>;
 }

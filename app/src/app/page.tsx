@@ -14,10 +14,10 @@ export default function Home() {
     Object.values(b).reduce((x, y) => x + y, 0);
 
   return (
-    <main>
+    <main id="main-content" className="home-main">
       <section className="hero">
-        <div>
-          <p className="eyebrow hero-eyebrow">AI fluency, measured</p>
+        <div className="hero-copy">
+          <p className="eyebrow hero-eyebrow">Workplace AI capability · Pilot instrument</p>
           <h1>What someone can actually do with AI, scored out of 800.</h1>
           <p className="hero-lede">
             Most AI readiness surveys measure confidence. This measures
@@ -34,7 +34,10 @@ export default function Home() {
             </Link>
           </div>
         </div>
-        <ol className="sequence">
+        <aside className="hero-aside" aria-label="Assessment overview">
+          <p className="aside-label">Built for development, not evaluation</p>
+          <p>Use the profile to target learning programs and measure growth across four practical capabilities.</p>
+          <ol className="sequence">
           <li>
             <span>01</span>
             <strong>Pick a form</strong>
@@ -50,10 +53,17 @@ export default function Home() {
             <strong>Read the profile</strong>
             A score, a band, four dimensions, and the one to work on next.
           </li>
-        </ol>
+          </ol>
+        </aside>
       </section>
 
-      <div className="workspace">
+      <section className="capability-section" aria-labelledby="capability-title">
+        <div className="section-intro">
+          <p className="eyebrow">The capability framework</p>
+          <h2 id="capability-title">Four dimensions that matter at work.</h2>
+          <p>Each dimension contributes equally to the final profile, so technical knowledge cannot mask weak judgment and vice versa.</p>
+        </div>
+        <div className="workspace">
         {DIMENSIONS.map((d, i) => (
           <div className="panel" key={d.key}>
             <p className="panel-index">
@@ -63,7 +73,8 @@ export default function Home() {
             <p>{d.blurb}</p>
           </div>
         ))}
-      </div>
+        </div>
+      </section>
 
       <div className="live-strip">
         <div>
@@ -84,8 +95,12 @@ export default function Home() {
         </div>
       </div>
 
-      <p className="eyebrow">How scoring works</p>
-      <div className="grid2">
+      <section className="scoring-section" aria-labelledby="scoring-title">
+        <div className="section-intro narrow-intro">
+          <p className="eyebrow">Transparent scoring</p>
+          <h2 id="scoring-title">A profile you can inspect, not a black-box verdict.</h2>
+        </div>
+        <div className="grid2 scoring-grid">
         <div className="card">
           <h2>Every dimension is worth the same</h2>
           <p className="muted">
@@ -125,7 +140,8 @@ export default function Home() {
             development plan than the total alone suggests.
           </p>
         </div>
-      </div>
+        </div>
+      </section>
 
       <p className="eyebrow">Illustrative bands</p>
       <div className="bandscale">
@@ -144,8 +160,12 @@ export default function Home() {
         shape of the scale rather than a verdict on a person.
       </p>
 
-      <p className="eyebrow">What this is not</p>
-      <div className="card t-violet">
+      <section className="guardrails" aria-labelledby="guardrails-title">
+        <div className="guardrails-heading">
+          <p className="eyebrow">Responsible use</p>
+          <h2 id="guardrails-title">Use the signal to plan learning. Do not turn it into a personnel rating.</h2>
+        </div>
+        <div className="guardrails-copy">
         <ul className="clean">
           <li>
             <strong>Not a validated instrument.</strong> No item discrimination
@@ -171,9 +191,10 @@ export default function Home() {
             could build it.
           </li>
         </ul>
-      </div>
+        </div>
+      </section>
 
-      <div className="card dark">
+      <div className="privacy-panel">
         <p className="eyebrow">Privacy</p>
         <h2 style={{ color: "var(--paper)" }}>
           Nothing you answer leaves your browser.
@@ -186,7 +207,8 @@ export default function Home() {
         </p>
       </div>
 
-      <div className="hero-actions">
+      <div className="closing-cta">
+        <div><p className="eyebrow">Ready when you are</p><h2>See your four-dimension profile.</h2></div>
         <Link href="/assessment" className="btn hero-cta">
           Start the assessment
         </Link>

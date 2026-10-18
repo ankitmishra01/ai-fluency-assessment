@@ -1,6 +1,19 @@
 import type { Metadata, Viewport } from "next";
+import { Source_Sans_3, Source_Serif_4 } from "next/font/google";
 import { Footer, Header } from "./chrome";
 import "./globals.css";
+
+const sans = Source_Sans_3({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const serif = Source_Serif_4({
+  subsets: ["latin"],
+  variable: "--font-serif",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "AI Fluency Assessment",
@@ -20,7 +33,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className={`${sans.variable} ${serif.variable}`}>
+        <a className="skip-link" href="#main-content">Skip to main content</a>
         <Header />
         {children}
         <Footer />
