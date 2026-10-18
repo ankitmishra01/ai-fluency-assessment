@@ -261,6 +261,32 @@ export default function MethodologyPage() {
         <h2>Known limitations in this build</h2>
         <ul className="clean">
           <li>
+            <strong>
+              The keyed answer is often the longest option, which is a real
+              validity problem.
+            </strong>{" "}
+            On form A the correct answer is the longest of the four options in
+            26 of 34 items, or 76 percent, against 25 percent by chance. Keyed
+            options average 126 characters and distractors average 98. Form B is
+            milder at 14 of 33, or 42 percent, with 130 against 108 characters.
+            This is the classic multiple-choice defect: a test-wise candidate
+            who knows nothing about the subject can score above chance by
+            picking the longest, most hedged option, so part of what this
+            instrument currently measures is test-taking skill rather than AI
+            fluency. The fix is cheap and mechanical, lengthen the distractors
+            and trim the keys until the four options are of comparable weight,
+            and it is the first thing that should happen before anyone uses a
+            score for a real decision. It is disclosed here rather than left for
+            a reader to discover, because an instrument that hides its own
+            measurement error is worse than one that names it.
+          </li>
+          <li>
+            <strong>Form B&apos;s answer key is unbalanced.</strong> Of its 33
+            items, 7 are keyed A, 13 B, 11 C and only 2 D. Guessing B beats
+            chance. Form A is close to even at 9, 10, 6 and 9. Balancing the key
+            distribution is part of the same cleanup pass.
+          </li>
+          <li>
             <strong>Unproctored and untimed.</strong> No identity check, no
             timer and no lockdown, so a score is only as honest as the person
             taking it. Fine for self-assessment and team diagnostics; not fine
