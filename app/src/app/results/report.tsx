@@ -4,16 +4,9 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { scoreAdaptive } from "@/lib/adaptive";
 import { bankItem } from "@/lib/item-bank";
-import { BANDS, bandNote, DIMENSION_MAX, getForm, TOTAL_MAX, score } from "@/lib/scoring";
+import { BANDS, bandNote, DIMENSION_MAX, getForm, LEVEL_LABELS, TOTAL_MAX, score } from "@/lib/scoring";
 import { clearRun, loadRun, type StoredRun } from "@/lib/storage";
 import type { DimensionScore, Result } from "@/lib/types";
-
-const LEVEL_LABELS: Record<Result["band"], string> = {
-  Beginner: "Foundation builder",
-  Novice: "Developing practitioner",
-  Intermediate: "Independent practitioner",
-  Advanced: "Advanced practitioner",
-};
 
 function dimensionStatus(dimension: DimensionScore, result: Result): string {
   if (dimension.key === result.weakest.key) return "Development priority";

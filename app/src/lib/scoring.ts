@@ -49,6 +49,17 @@ export const DIMENSIONS: {
   },
 ];
 
+/** Public-facing band names. `BandName` is the internal key; these are the only
+ *  labels a user should ever see, and they must match the scale printed on the
+ *  results page. Rendering a raw BandName leaks "Beginner"/"Novice", which are
+ *  not on that scale. */
+export const LEVEL_LABELS: Record<BandName, string> = {
+  Beginner: "Foundation builder",
+  Novice: "Developing practitioner",
+  Intermediate: "Independent practitioner",
+  Advanced: "Advanced practitioner",
+};
+
 export const BANDS: { name: BandName; min: number; max: number; note: string }[] =
   [
     {
