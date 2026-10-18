@@ -1,0 +1,665 @@
+{
+ "A": [
+  {
+   "section": "technical",
+   "q": "What role does \"KV-caching\" (key-value caching) play in transformer inference efficiency?",
+   "options": {
+    "A": "It caches the model's entire training dataset in memory so it doesn't need to be reloaded for each inference request",
+    "B": "It stores previously computed key and value vectors from earlier tokens so they don't need to be recomputed at each new generation step",
+    "C": "It compresses the model's weights into a smaller cached file to reduce disk storage requirements",
+    "D": "It caches user conversation history so the model can recall previous chat sessions automatically"
+   },
+   "answer": "B"
+  },
+  {
+   "section": "technical",
+   "q": "What's the difference between training a model and fine-tuning one?",
+   "options": {
+    "A": "Training builds a model on a broad dataset; fine-tuning further trains it on a smaller, specific dataset",
+    "B": "Training and fine-tuning are the same process, just different names used by different companies",
+    "C": "Fine-tuning happens before training, as a way to prepare the data",
+    "D": "Training adjusts a model's code; fine-tuning adjusts the hardware it runs on"
+   },
+   "answer": "A"
+  },
+  {
+   "section": "technical",
+   "q": "What does \"beam search\" do during text generation?",
+   "options": {
+    "A": "It searches the entire internet in real time to fact-check the model's output before finalizing it",
+    "B": "It explores multiple candidate sequences simultaneously, keeping the most promising ones at each step",
+    "C": "It randomly samples tokens at each step to maximize output diversity regardless of quality",
+    "D": "It generates several full responses independently and then averages their word choices together"
+   },
+   "answer": "B"
+  },
+  {
+   "section": "technical",
+   "q": "What do \"scaling laws\" describe in the context of large language models?",
+   "options": {
+    "A": "Predictable, roughly power-law relationships between model performance and factors like parameter count, dataset size, and compute",
+    "B": "Legal regulations that limit how large an AI company's model can become",
+    "C": "Empirical relationships improve in exact proportion to the amount of compute used, regardless of data or parameter count",
+    "D": "A fixed formula guaranteeing that doubling parameters always exactly doubles performance"
+   },
+   "answer": "A"
+  },
+  {
+   "section": "technical",
+   "q": "Why do AI chatbots sometimes make things up?",
+   "options": {
+    "A": "Because they are programmed to make conversations more interesting",
+    "B": "Because they're copying errors from a specific \"bad\" section of the internet they were trained on",
+    "C": "Because they generate text based on learned patterns of plausibility, not by checking facts against a database",
+    "D": "Because their microphone is undeveloped and often misinterprets statements"
+   },
+   "answer": "C"
+  },
+  {
+   "section": "technical",
+   "q": "What is a mixture-of-experts (MoE) architecture, and how does it improve compute efficiency?",
+   "options": {
+    "A": "An MoE architecture trains several completely separate models and then averages their final outputs together",
+    "B": "An MoE architecture uses a panel of human experts to manually review and correct the model's outputs before they are returned to the user",
+    "C": "An MoE architecture activates all of its parameters for every input but organizes them into labeled \"expert\" categories for interpretability purposes only",
+    "D": "An MoE architecture routes each input to a subset of specialized \"expert\" sub-networks for larger total parameter count while keeping computation per input relatively low"
+   },
+   "answer": "D"
+  },
+  {
+   "section": "technical",
+   "q": "How does \"batch size\" affect the training of a neural network?",
+   "options": {
+    "A": "Larger batch sizes always guarantee a more accurate final model regardless of other settings",
+    "B": "Batch size only affects how the data is stored on disk, not how training proceeds",
+    "C": "Batch size only affects how much memory training consumers, not training speed or the stability of gradient estimates",
+    "D": "Larger batch sizes provide more stable gradient estimates and can speed up training, though they can sometimes hurt generalization"
+   },
+   "answer": "D"
+  },
+  {
+   "section": "technical",
+   "q": "What is the purpose of positional encoding in a transformer?",
+   "options": {
+    "A": "It encodes which company trained the model, embedded into every output",
+    "B": "It replaces the need for token embeddings entirely since position alone is sufficient to represent each word",
+    "C": "It gives the model information about each token's position in the sequence, since a transformer doesn\u2019t inherently capture word order",
+    "D": "It compresses the sequence length to reduce computational cost during training"
+   },
+   "answer": "C"
+  },
+  {
+   "section": "technical",
+   "q": "What is the difference between supervised fine-tuning (SFT) and instruction tuning?",
+   "options": {
+    "A": "SFT and instruction tuning are two unrelated processes that are used on different models",
+    "B": "SFT refers broadly to further training a model on labeled examples for a task, while instruction tuning is a specific form of SFT using examples of instructions paired with desired responses",
+    "C": "SFT only applies to image models, while instruction tuning only applies to text models",
+    "D": "Instruction tuning replaces the need for any pretraining, allowing a model to be built from instruction data alone and SFT can be used after the model produces expected results."
+   },
+   "answer": "B"
+  },
+  {
+   "section": "applied",
+   "q": "What is a reasonable way for a company to measure the ROI of an AI initiative?",
+   "options": {
+    "A": "By comparing costs within the first month with costs over the first 12 months",
+    "B": "By tracking how many employees express enthusiasm about using the new tool",
+    "C": "By tracking costs (tools, implementation, training) against measurable outcomes",
+    "D": "By comparing the AI project's cost to all marketing expenses"
+   },
+   "answer": "C"
+  },
+  {
+   "section": "applied",
+   "q": "What's a reasonable consideration when deploying an AI-based cash flow forecasting model?",
+   "options": {
+    "A": "The model requires no historical financial data since it can predict cash flow purely from current bank balances",
+    "B": "The model's forecasts are only useful for public companies, not private businesses",
+    "C": "The model needs to account for seasonality, but only if weather is a risk to business operations",
+    "D": "The model needs to account for seasonality and one-off events, like a large contract payment, that can distort typical patterns"
+   },
+   "answer": "D"
+  },
+  {
+   "section": "applied",
+   "q": "What's a common risk of using AI tools that handle customer data?",
+   "options": {
+    "A": "AI tools cannot process customer data at all, so this isn't typically a concern",
+    "B": "Mishandling personal data can create privacy risks and potential regulatory violations",
+    "C": "AI tools automatically anonymize all data, removing any privacy risk entirely",
+    "D": "A high level risk is that customer data might be stored using more disk space than expected"
+   },
+   "answer": "B"
+  },
+  {
+   "section": "applied",
+   "q": "What's a real challenge in applying reinforcement learning to optimize a live production process in real time?",
+   "options": {
+    "A": "The model must explore different actions to learn, but unconstrained exploration on a live line risks costly or unsafe outcomes",
+    "B": "Reinforcement learning requires no long run safety constraints since it always converges to the optimal policy immediately",
+    "C": "The only challenge is that reinforcement learning models are too slow to ever be used in real time",
+    "D": "Reinforcement learning is dangerous and should be avoided"
+   },
+   "answer": "A"
+  },
+  {
+   "section": "applied",
+   "q": "What's a significant concern when using AI-driven causal inference (rather than pure correlation) to guide business strategy decisions?",
+   "options": {
+    "A": "Causal inference models are unnecessary since correlation is always sufficient for business decisions",
+    "B": "Causal inference take less times to build but costs more money to design",
+    "C": "Even well-designed causal models rely on assumptions that can be violated in hard-to-detect ways, leading to false confidence in a causal claim",
+    "D": "Violations can be detected more easily so concerns about causal inference models are minimal"
+   },
+   "answer": "C"
+  },
+  {
+   "section": "applied",
+   "q": "What is the difference between \"automation\" and \"AI\" in a business context?",
+   "options": {
+    "A": "Automation follows fixed, pre-programmed steps, while AI can learn from data and adapt its outputs over time",
+    "B": "Automation and AI are the same thing, just marketed differently by software vendors",
+    "C": "Automation and AI work for manufacturing, while AI only works for office tasks",
+    "D": "Automation and AI both require identical amounts of data to function, so there's no practical difference"
+   },
+   "answer": "A"
+  },
+  {
+   "section": "applied",
+   "q": "What is a key challenge in using AI for multi-echelon inventory optimization across a global supply chain?",
+   "options": {
+    "A": "AI cannot process numerical inventory making it unhelpful for multi-echelon inventory optimization",
+    "B": "The main challenge is that AI models need identical computing power regardless of supply chain size, so this is purely a hardware issue",
+    "C": "The main challenge is that local priorities and data systems conflict across a global supply chain",
+    "D": "The main challenge is balancing conflicting local objectives with global efficiency goals, while managing latency and inconsistency"
+   },
+   "answer": "D"
+  },
+  {
+   "section": "applied",
+   "q": "What's a risk of using AI-driven attribution modeling to determine which marketing channels deserve credit for a sale?",
+   "options": {
+    "A": "Different attribution models can assign different credit to the same customer journey, leading marketers to over- or under-invest in channels based on a distorted picture",
+    "B": "Attribution models are 100% accurate because they use exact click data and track clicks in real time",
+    "C": "The main risk is that attribution models are too expensive to run for small companies, unless they outsource the model to a third party vendor",
+    "D": "Attribution modeling risk only matters for companies with fewer than three marketing channels, since larger channel mixes make the difference statistically negligible"
+   },
+   "answer": "A"
+  },
+  {
+   "section": "applied",
+   "q": "How should an R&D team weigh the trade-offs of using generative AI for early-stage material discovery?",
+   "options": {
+    "A": "Generative AI can eliminate all physical testing since simulated materials are identical to real ones and carry fewer risks",
+    "B": "The only trade-off is the computing cost of running the simulations, since accuracy is expected and sit will save enterprise costs in the short and long run",
+    "C": "Generative approaches cannot expand and accelerate the candidate search space beyond trial-and-error",
+    "D": "Generative approaches can expand the candidate search space, but predictions still need physical validation"
+   },
+   "answer": "D"
+  },
+  {
+   "section": "applied",
+   "q": "What is a key challenge in deploying AI-based anomaly detection across a hybrid cloud/on-premises environment?",
+   "options": {
+    "A": "Anomaly detection is impossible in hybrid environments because cloud and on-premises systems cannot share any data",
+    "B": "Establishing a consistent behavioral baseline is difficult when environments have different logging formats and visibility, which can create blind spots or false positives",
+    "C": "The only challenge is slightly higher latency, which has no real effect on detection accuracy",
+    "D": "AI based anomaly detection is slower than human review so the key challenge is cost especially across a hybrid cloud/on-premises environment."
+   },
+   "answer": "B"
+  },
+  {
+   "section": "risk",
+   "q": "Why can't a business assume AI will always deliver a positive return on investment?",
+   "options": {
+    "A": "AI tools fail within the first year of use before they become more efficient and save costs",
+    "B": "Costs, implementation time, and required adjustments can offset the benefits if the tool isn't well-matched to the problem",
+    "C": "AI tools need legal approval which can cost more than the return",
+    "D": "ROI can only be measured for hardware, not software tools"
+   },
+   "answer": "B"
+  },
+  {
+   "section": "risk",
+   "q": "What is the strategic risk-reward calculus behind pursuing \"first-mover advantage\" in adopting a novel, unproven AI technology within an industry?",
+   "options": {
+    "A": "First movers succeed since being first guarantees market dominance for long enough to adjust to any suboptimal outcomes",
+    "B": "First movers may gain a head start in capability and market positioning, but also bear the risk of a risk committing to an approach that later proves suboptimal",
+    "C": "There is a reward with first-mover advantage but a risk that employees and customers oppose all technology including those adopting AI technology",
+    "D": "There is a reward with new AI technology but a risk because it depends upon government subsidies to be a first mover advantage and governments change"
+   },
+   "answer": "B"
+  },
+  {
+   "section": "risk",
+   "q": "What's a risk-reward consideration when a company decides how much historical data to retain for training future AI models?",
+   "options": {
+    "A": "Retaining more data can improve model training, but this must be weighed against the possibility that older data reflects outdated patterns",
+    "B": "Retaining all data is required so not doing so risks regulatory fines",
+    "C": "More historical data is better, with no downside to retaining as much as possible as long as you have the storage",
+    "D": "Beyond three years, historical data can\u2019t be stored safely so it should be considered corrupt and not used in training future AI models"
+   },
+   "answer": "A"
+  },
+  {
+   "section": "risk",
+   "q": "Why might a company accept a lower-performing but more explainable AI model over a higher-performing \"black box\" model in some business contexts?",
+   "options": {
+    "A": "Because less accurate models are cheaper to run, but explainability is not really relevant for businesses",
+    "B": "Because black-box models are more accurate but illegal to use in most business contexts",
+    "C": "Because being able to explain something means more people understand it making it more accurate as people engage with it",
+    "D": "Because in some contexts, being able to explain a decision to regulators, customers, or auditors is more valuable even if there is lower accuracy"
+   },
+   "answer": "D"
+  },
+  {
+   "section": "risk",
+   "q": "How should a company approach the reward of personalized AI-driven pricing against the risk of alienating customers who perceive it as unfair?",
+   "options": {
+    "A": "Companies should weigh potential revenue gains against the risk of public backlash or perceived unfairness",
+    "B": "Personalized pricing carries no reputational risk as long as the company is transparent and it increases short-term revenue",
+    "C": "The only risk is a minor increase in customer service calls, which has no broader business impact",
+    "D": "Companies should never adopt personalized pricing because it is a crime"
+   },
+   "answer": "A"
+  },
+  {
+   "section": "risk",
+   "q": "What is a common reward businesses seek from using AI in customer service?",
+   "options": {
+    "A": "Complete elimination of any need for human customer support staff",
+    "B": "Faster response times and 24/7 availability for common customer questions",
+    "C": "Higher customer satisfaction on every interaction because of personalized support",
+    "D": "The ability to ignore customer complaints entirely"
+   },
+   "answer": "B"
+  },
+  {
+   "section": "risk",
+   "q": "How should a company evaluate the risk-reward trade-off of deploying an AI system whose failure mode is rare but potentially catastrophic, versus one with frequent but minor failures?",
+   "options": {
+    "A": "Frequent minor failures are worse than rare catastrophic ones because they are more frequent",
+    "B": "Rare catastrophic failures can be ignored in risk planning since they are unlikely to occur during any given year",
+    "C": "Catastrophic, low-probability events may warrant disproportionate safeguards given their potential to cause severe, possibly irreversible harm",
+    "D": "Leave it up to the CEO in terms of their risk appetite for types of failure"
+   },
+   "answer": "C"
+  },
+  {
+   "section": "risk",
+   "q": "How should a company think about the risk-reward trade-off of concentrating AI capabilities in a small, specialized internal team versus distributing AI literacy broadly across the organization?",
+   "options": {
+    "A": "Concentrating expertise can produce deeper technical capability, but risks creating a bottleneck and disconnect from how AI could be used in day-to-day business functions",
+    "B": "There is no trade-off, since concentrating expertise in a small team produces identical outcomes to broad distribution",
+    "C": "The only consideration is cost, since a small specialized team is cheaper regardless of organizational needs",
+    "D": "Distributing AI literacy broadly eliminates the need for any specialized AI expertise, since every employee becomes capable"
+   },
+   "answer": "A"
+  },
+  {
+   "section": "risk",
+   "q": "What is an ongoing consideration in weighing the reward of an AI system's short-term efficiency gains against the long-term risk of organizational skill atrophy?",
+   "options": {
+    "A": "Skill atrophy is not a meaningful risk since employees can immediately relearn any skill an AI system has automated",
+    "B": "The relevant consideration is whether the AI system reduces headcount costs in the short term",
+    "C": "Organization skill atrophy comes from all kinds of sources so it shouldn\u2019t weigh into the decisions around AI systems",
+    "D": "As employees rely more on AI for certain judgment tasks, there is a risk that their own skill and ability to catch AI errors may decline over time"
+   },
+   "answer": "D"
+  },
+  {
+   "section": "risk",
+   "q": "How can a business start to weigh the risk-reward trade-off before adopting an AI tool?",
+   "options": {
+    "A": "By assuming any tool marketed as \"AI-powered\" is innovation and so worth the investment",
+    "C": "By waiting until a competitor has already succeeded with the same tool before considering any analysis",
+    "D": "By estimating potential benefits (time savings, revenue impact) against potential costs (errors, training time, disruption)"
+   },
+   "answer": "D"
+  },
+  {
+   "section": "case",
+   "q": "Why might Company A have chosen human review specifically for policy-related responses rather than all chatbot responses?",
+   "options": {
+    "A": "Policy-related answers carry higher risk of customer harm or dissatisfaction if wrong, so targeting oversight there balances risk reduction with maintaining overall efficiency",
+    "B": "Human review of all responses would have been technically impossible to implement",
+    "C": "Policy questions are asked far less often than other questions, so this can be a random operational choice",
+    "D": "A company should focus human review around all chatbot responses and save costs elsewhere or else it risks legal violations"
+   },
+   "answer": "A"
+  },
+  {
+   "section": "case",
+   "q": "What does the choice to add a real-time accuracy monitoring dashboard, rather than relying solely on periodic manual audits, suggest about Company A's approach to catching future errors?",
+   "options": {
+    "A": "It suggests audits are unnecessary once monitoring exists and can be discontinued entirely in order to save costs",
+    "B": "It suggests real-time monitoring completely eliminates the possibility of any future errors",
+    "C": "It suggests Company A values transparency for its customers, letting them decide what is an error",
+    "D": "It suggests Company A prioritized continuous visibility so problems could be caught and addressed as they emerge"
+   },
+   "answer": "D"
+  },
+  {
+   "section": "case",
+   "q": "What does the decision to expand the chatbot to the loyalty program, after adding monitoring, suggest about Company A's risk management approach?",
+   "options": {
+    "A": "Company A eliminated all future risk entirely by adding the monitoring dashboard",
+    "B": "Company A is expanding cautiously",
+    "C": "Company A seems to be reversing its decision to use AI and increasing automation instead",
+    "D": "Company A expanded and accepted that accuracy issues shouldn\u2019t imped progress"
+   },
+   "answer": "B"
+  },
+  {
+   "section": "case",
+   "q": "What broader lesson about scaling customer-facing AI tools does this case suggest?",
+   "options": {
+    "A": "That customer-facing AI tools should never be scaled without a competitor adopting the same tools",
+    "B": "That strong pilot metrics don't guarantee flawless performance at scale",
+    "C": "That cost savings alone are sufficient justification for scaling even with accuracy issues",
+    "D": "That accuracy problems in one use case shouldn\u2019t be relevant for other planned expansions"
+   },
+   "answer": "B"
+  }
+ ],
+ "B": [
+  {
+   "section": "technical",
+   "q": "What is a \"token,\" and why do language models use them instead of whole words?",
+   "options": {
+    "A": "A token is a unit of text (often a word or sub-word piece); using them lets models handle language more flexibly than whole-word vocabularies",
+    "B": "A token is a single letter; models use letters because it's the smallest possible unit of language",
+    "C": "A token is a unit of text, similar to a word; models use tokens mainly to reduce the file size of the model",
+    "D": "A token is a unique ID assigned to each user's conversation, used to keep chats separate"
+   },
+   "answer": "A"
+  },
+  {
+   "section": "technical",
+   "q": "What is \"latent space,\" and why is it useful for tasks like image generation?",
+   "options": {
+    "A": "Latent space is the model's cache of previously seen images, reused for new generations so minimizing search time and cost",
+    "B": "Latent space is a lookup table that maps each possible output to one, fixed unchanging coordinate so maximizing stability and reliability with image generation",
+    "C": "Latent space is a compressed internal representation capturing key features of data; moving through it in small steps produces smooth, meaningful changes in output",
+    "D": "Latent space refers to unused portions of a model's memory reserved and kept for future use"
+   },
+   "answer": "C"
+  },
+  {
+   "section": "technical",
+   "q": "What is a neural network, in simple terms?",
+   "options": {
+    "A": "A network of physical neurons extracted from lab-grown brain tissue, wired together electrically to learn patterns from data",
+    "B": "A database that stores facts in a searchable table, similar to a spreadsheet",
+    "C": "A system of interconnected mathematical functions, loosely inspired by brain neurons, that learns patterns from data",
+    "D": "A computer program that follows a fixed set of \"if-then\" rules written by programmers"
+   },
+   "answer": "C"
+  },
+  {
+   "section": "applied",
+   "q": "What's a key difference between using an off-the-shelf AI tool versus building a custom AI solution?",
+   "options": {
+    "A": "Off-the-shelf tools may be cheaper but may not fit unique business needs as precisely",
+    "B": "Off-the-shelf tools always require more coding expertise than custom-built solutions",
+    "C": "Custom solutions are always cheaper in the long run regardless of company size or use case",
+    "D": "There's no meaningful difference \u2014 both options offer identical functionality and cost"
+   },
+   "answer": "A"
+  },
+  {
+   "section": "applied",
+   "q": "What does \"AI governance\" mean within an organization?",
+   "options": {
+    "A": "The government regulations that ban companies from using AI in most business functions except where there is shared governance",
+    "B": "The policies, structures, and accountability process a company puts in place to manage how AI is developed, deployed, and monitored responsibly",
+    "C": "A team, including the CEO, whose job is approving every AI-generated output, and who are responsible for deployment and monitoring",
+    "D": "The IT department's process for installing software updates on employee laptops and then tracking updates"
+   },
+   "answer": "B"
+  },
+  {
+   "section": "applied",
+   "q": "What role does \"explainability\" play in adopting AI for high-stakes business decisions (e.g., lending, hiring)?",
+   "options": {
+    "A": "Explainability isn't as important as long as its predictions are statistically accurate",
+    "B": "Explainability helps with building trust and identifying potential bias",
+    "C": "Explainability is a legal requirement only in the healthcare industry where customers are protected by patient rights",
+    "D": "Explainability primarily matters for improving a model's processing speed whenever a company works with a third party vendor"
+   },
+   "answer": "B"
+  },
+  {
+   "section": "applied",
+   "q": "How should organizations think about the trade-off between model performance and interpretability when deploying AI in regulated industries?",
+   "options": {
+    "A": "Higher-performing models (e.g., deep neural networks) are often less interpretable than simpler models, but this rarely matters in practice since investors and regulators only care about a model\u2019s accuracy, not how it works",
+    "B": "There is no real trade-off, since the most accurate models are also always the easiest to interpret",
+    "C": "Simpler, more interpretable models (e.g., logistic regression) may sometimes be preferred over more complex, higher-performing models to satisfy regulatory requirements",
+    "D": "Interpretability only matters for internal reporting and shouldn\u2019t be considered for future investments around model performance"
+   },
+   "answer": "C"
+  },
+  {
+   "section": "applied",
+   "q": "How should a company approach vendor risk assessment when adopting a third-party AI tool that will process sensitive business data?",
+   "options": {
+    "A": "Assuming that any well-known AI vendor is automatically compliant with the company's data security and privacy requirements",
+    "B": "Evaluating the vendor's data handling practices, security certifications, model training data sources, and contractual terms around data usage, but let the third party carry all the burden of data usage and retention",
+    "C": "Reviewing the vendor's data security practices, certifications, and contract terms on data usage and retention, while also assessing whether vendor lock-in or model updates could introduce future operational risk",
+    "D": "Formal risk assessment is not necessary during a free trial period and then safeguards for sensitive data can be built after adoption"
+   },
+   "answer": "C"
+  },
+  {
+   "section": "applied",
+   "q": "What are the challenges of attributing business impact (ROI) to an AI initiative when multiple interventions are happening simultaneously?",
+   "options": {
+    "A": "As long as the interventions are identified in a transparent manner it is legitimate to conclude that the AI initiative had an impact",
+    "B": "ROI attribution is straightforward because AI's impact can be isolated by comparing before-and-after revenue figures",
+    "C": "Without rigorous experimental design, correlated changes (e.g., new marketing campaigns, seasonality, other process changes) can be mistakenly credited to the AI initiative, making causal attribution unreliable",
+    "D": "Attribution challenges only arise in companies with fewer than 100 employees, since larger companies have cleaner data and stronger models for ROI"
+   },
+   "answer": "C"
+  },
+  {
+   "section": "applied",
+   "q": "Why is data quality important when a business wants to use AI effectively?",
+   "options": {
+    "A": "AI models learn patterns from data, so poor-quality or biased data can lead to inaccurate or unreliable outputs",
+    "B": "Data quality only matters for very large companies, not small businesses where generalization is impossible",
+    "C": "AI models correct data quality issues automatically before learning from them so a company doesn\u2019t need to worry about quality of data at the input stage",
+    "D": "Data quality mainly affects how fast a model runs, not the accuracy of its outputs"
+   },
+   "answer": "A"
+  },
+  {
+   "section": "applied",
+   "q": "What's a concern about relying on AI-generated synthetic data to augment training datasets?",
+   "options": {
+    "A": "Synthetic data is always statistically identical to original data, eliminating any concern",
+    "B": "The only concern is that synthetic data takes longer to generate than collecting real data",
+    "C": "Synthetic data matches the statistical properties of real data, so it carries no risk of downgrading downstream model quality",
+    "D": "Synthetic data can inherit and amplify, biases, errors, or unrealistic patterns present in the original data"
+   },
+   "answer": "D"
+  },
+  {
+   "section": "applied",
+   "q": "What are some key considerations when deciding whether to buy an AI solution versus build one in-house?",
+   "options": {
+    "A": "The cheapest cost across competing vendors should be the primary consideration",
+    "B": "Factors include how quickly the company needs a working solution relative to its size and available resources",
+    "C": "Long-term maintenance costs and how quickly a solution needs to be deployed",
+    "D": "Companies should always build in-house since it demonstrates stronger technical capability to investors"
+   },
+   "answer": "C"
+  },
+  {
+   "section": "applied",
+   "q": "What does it mean for a company to \"adopt AI\"?",
+   "options": {
+    "A": "The company hires only employees who already have computer science degrees",
+    "B": "The company integrates AI tools or systems into its processes",
+    "C": "The company replaces its entire workforce with robots",
+    "D": "The company purchases new computers for all employees"
+   },
+   "answer": "B"
+  },
+  {
+   "section": "risk",
+   "q": "Why is it risky for a business to deploy an AI tool without a clear plan for monitoring its ongoing performance?",
+   "options": {
+    "A": "Adopting an AI tool without a clear plan for monitoring is risky during the first week but then the cost of monitoring is usually too high to continue",
+    "B": "A monitoring plan is important because a model's accuracy or relevance can degrade over time as data or conditions change",
+    "C": "AI tools don\u2019t need a monitoring plan in terms of risk once they've been validated",
+    "D": "Adopting an AI tool without a clear plan for monitoring is risky if the tool was built in-house but not if relying on an outside vendor"
+   },
+   "answer": "B"
+  },
+  {
+   "section": "risk",
+   "q": "What is a basic example of a \"reward\" a business might get from using AI?",
+   "options": {
+    "A": "Guaranteed profit increases",
+    "B": "Faster processing of repetitive tasks, freeing up employee time for other work",
+    "C": "Elimination of all future business risk",
+    "D": "Automatic legal compliance"
+   },
+   "answer": "B"
+  },
+  {
+   "section": "risk",
+   "q": "How can a company quantify the potential reward of an AI initiative when the benefits are partly qualitative (e.g., improved decision-making)?",
+   "options": {
+    "A": "Excluding qualitative benefits from ROI analysis makes sense because they can't be measured",
+    "B": "By combining direct financial metrics with impression satisfaction surveys to approximate the harder-to-quantify benefits",
+    "C": "By using proxy indicators such as decision-making speed, alongside direct financial metrics, to build a fuller picture of value",
+    "D": "By reporting the initiative as successful but only if it can be tied to a single, easily measurable dollar figure"
+   },
+   "answer": "C"
+  },
+  {
+   "section": "risk",
+   "q": "How should a company think about reputational risk versus competitive reward when deploying customer-facing generative AI (e.g., AI-written content or AI-driven recommendations) at scale?",
+   "options": {
+    "A": "Reputational risk is negligible as long as the AI system technically functions without crashing and as long as the company lets customers know that they are using AI",
+    "B": "Companies should weigh the competitive upside of scale and personalization against the risk of errors, bias, or inappropriate outputs reaching customers",
+    "C": "The only meaningful mitigation is purchasing broad liability insurance, since technical guardrails cannot meaningfully reduce reputational risk",
+    "D": "Reputational risk only applies to highly regulated industries like finance or healthcare, not to general consumer-facing businesses"
+   },
+   "answer": "B"
+  },
+  {
+   "section": "risk",
+   "q": "What's a strategic risk of moving too slowly to adopt AI in a competitive industry?",
+   "options": {
+    "A": "Moving slowly guarantees a company will face much less AI-related risk but more consumer distrust",
+    "B": "Competitors who wait to adopt AI may find it is more difficult to catch up to later",
+    "C": "There is no meaningful strategic risk to moving slowly, since AI tools improve every year regardless of timing",
+    "D": "Moving slowly affects marketing perception risk"
+   },
+   "answer": "B"
+  },
+  {
+   "section": "risk",
+   "q": "How should a company maximize the reward of increased efficiency from AI-driven automation against the risk of reduced human oversight?",
+   "options": {
+    "A": "By automating as many processes as possible immediately, then re-introduce human oversight as needed",
+    "B": "By identifying which decisions require human judgment or accountability and maintaining appropriate checkpoints, even while automating routine parts of the process",
+    "C": "Recognizing human oversight is equally error-prone compared with an automated system so either method of oversight can be used",
+    "D": "By avoiding automation of any process that previously involved a human, and focus on AI-driven automation only for new processes and innovations"
+   },
+   "answer": "B"
+  },
+  {
+   "section": "risk",
+   "q": "What's a reasonable way to balance the reward of faster AI-driven insights against the risk of relying on inaccurate data?",
+   "options": {
+    "A": "Data quality isn\u2019t relevant here, since AI models can self-correct any errors automatically",
+    "B": "Investing in data cleaning and validation processes before relying heavily on AI-driven insights for decisions",
+    "C": "It is reasonable to assume that any insight generated by AI is inherently more reliable than human-generated analysis",
+    "D": "Avoiding all AI tools until the company's data is completely perfect"
+   },
+   "answer": "B"
+  },
+  {
+   "section": "risk",
+   "q": "What's a key trade-off in deciding whether to keep a \"human-in-the-loop\" for high-stakes automated decisions?",
+   "options": {
+    "A": "Human review reduces risk of error or bias but can slow down decision speed and add cost",
+    "B": "Human review has no additional benefit once a model has been validated on historical data",
+    "C": "Fully automated decisions are always preferable in high-stakes settings",
+    "D": "Human-in-the-loop processes are most relevant in heavily regulated industries and provide less benefit elsewhere"
+   },
+   "answer": "A"
+  },
+  {
+   "section": "risk",
+   "q": "How does model risk (e.g., silent performance degradation, data drift) factor into a company's long-term risk management strategy for AI systems?",
+   "options": {
+    "A": "Model risk should be treated as a one-time consideration addressed fully during initial deployment and validation",
+    "B": "Companies should establish ongoing monitoring, periodic revalidation, and clear thresholds for retraining or decommissioning models",
+    "C": "Ongoing monitoring for data drift and performance degradation is necessary, with defined retraining thresholds, though this is generally sufficient without needing formal decommissioning criteria",
+    "D": "Model risk primarily concerns computational cost and has little bearing on decision quality over time"
+   },
+   "answer": "B"
+  },
+  {
+   "section": "risk",
+   "q": "What's the strategic risk-reward calculus behind a company choosing to build proprietary AI capabilities versus relying entirely on third-party AI vendors?",
+   "options": {
+    "A": "Relying on vendors is faster and cheaper initially but risks dependency",
+    "B": "Building proprietary capability is always the superior choice for any company, obtaining the resources or technical talent as needed",
+    "C": "Relying on third-party vendors eliminates business risks since the vendor assumes full liability for any model failures",
+    "D": "There is no meaningful strategic difference between building and buying, since both approaches produce identical long-term outcomes"
+   },
+   "answer": "A"
+  },
+  {
+   "section": "case",
+   "q": "What does the ice storm incident reveal about a key limitation of AI models trained on historical data?",
+   "options": {
+    "A": "Historical data models are always unreliable and should never be used for logistics",
+    "B": "The model may struggle with conditions poorly represented in its training data, such as rare extreme weather events",
+    "C": "The model failed only because it wasn't trained on enough data overall, regardless of the type",
+    "D": "The ice storm proves that AI models are only useful during predictable, mild weather conditions"
+   },
+   "answer": "B"
+  },
+  {
+   "section": "case",
+   "q": "Why might Company A have chosen to add a human oversight step rather than simply retraining the model before rollout?",
+   "options": {
+    "A": "Retraining a model can take time and may still not fully cover rare, hard-to-predict scenarios, so a manual override offers a more immediate safeguard while the model continues to improve",
+    "B": "Human oversight is more careful and able to catch anomalies",
+    "C": "Company Awas legally required to include a human step regardless of the technical issue",
+    "D": "The company might have realized that dispatchers preferred manual control in all situations, and that the quantitative data wasn\u2019t helpful"
+   },
+   "answer": "A"
+  },
+  {
+   "section": "case",
+   "q": "What risk-management principle is best exemplified by Company A's decision to require manual override before full-scale rollout?",
+   "options": {
+    "A": "Avoiding AI use entirely until it can be proven completely error-free",
+    "B": "Scaling a technology only after identifying and mitigating a known failure mode, rather than assuming success in a pilot guarantees success at scale",
+    "C": "Assuming that early positive results are sufficient justification to skip further risk assessment",
+    "D": "Prioritizing speed of rollout over addressing any operational issues identified during the pilot"
+   },
+   "answer": "B"
+  },
+  {
+   "section": "case",
+   "q": "What broader trade-off does Company A's experience best illustrate about adopting AI in operational settings?",
+   "options": {
+    "A": "That AI adoption in logistics is universally risk-free once initial performance metrics look strong",
+    "B": "That meaningful efficiency gains from AI can come with real operational risks that require ongoing safeguards, especially in edge cases not well-represented in training data",
+    "C": "That fuel cost savings may justify skipping the additional safety costs during AI rollout",
+    "D": "That pilot programs are unnecessary once a company has confidence in an AI vendor's reputation"
+   },
+   "answer": "B"
+  }
+ ]
+}
