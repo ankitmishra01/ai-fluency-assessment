@@ -1,6 +1,12 @@
 # AI Fluency Assessment
 
-A prototype AI fluency assessment: two parallel forms, four dimensions, scored out of 800.
+A prototype AI fluency assessment for workplace learning and development: two
+parallel forms, four dimensions, and a score out of 800. Results include an
+evidence-led capability profile and a printable six-week learning plan generated
+from the employee's two lowest-scoring dimensions.
+
+Live prototype: <https://ai-fluency-assessment-prototype.vercel.app/>
+
 Built by Ankit Mishra. Pilot item bank, illustrative scoring bands, not a validated instrument.
 
 ## Layout
@@ -27,6 +33,7 @@ position, and one double-keyed item is excluded by the `EXCLUDE` list in `emit_i
 ```
 cd app
 npm install
+npm test
 npm run typecheck
 npm run build
 npm run dev

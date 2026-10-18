@@ -4,7 +4,7 @@ import { Report } from "./report";
 export const metadata: Metadata = {
   title: "Result · AI Fluency Assessment",
   description:
-    "Your score out of 800, the four-dimension breakdown, and a per-item review. Scored in your browser; nothing is sent anywhere.",
+    "Your evidence-based AI fluency profile, four-dimension breakdown, and development priorities.",
 };
 
 export default function ResultsPage() {
@@ -15,8 +15,9 @@ export default function ResultsPage() {
       </div>
       <h1>Your AI fluency profile</h1>
       <p className="lede">
-        Scored on your own device from the answers held in this browser tab.
-        Nothing was uploaded, and no copy of this result exists anywhere else.
+        This prototype scores the answers held in your browser tab. In a company
+        program, this profile would be shared with your employer to plan learning
+        and development.
       </p>
       <Report />
     </main>
