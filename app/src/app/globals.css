@@ -386,6 +386,24 @@ main { max-width: 1240px; padding: 40px var(--space-page) 72px; }
   .logo .logo-mark { display: grid; }
   .logo .logo-copy { display: grid; }
   .logo .logo-copy > span { display: none; }
+  .methodology-nav {
+    top: 0;
+    scroll-snap-type: x proximity;
+    scrollbar-width: thin;
+  }
+  .methodology-nav a { scroll-snap-align: start; }
+  .q-card .q-nav {
+    position: sticky;
+    bottom: max(0px, env(safe-area-inset-bottom));
+    z-index: 6;
+    margin: 18px -14px -16px;
+    padding: 12px 14px calc(12px + env(safe-area-inset-bottom));
+    border-top: 1px solid var(--line-strong);
+    background: rgba(252,251,247,.97);
+    backdrop-filter: blur(10px);
+  }
+  .q-card .q-nav .btn,
+  .q-card .q-nav button { flex: 1 1 0; }
   .hero { min-height: auto; grid-template-columns: 1fr; }
   .hero-aside { border-top: 1px solid rgba(255,255,255,.18); border-left: 0; }
   .section-intro, .guardrails { grid-template-columns: 1fr; gap: 16px; }
