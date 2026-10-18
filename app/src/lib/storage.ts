@@ -3,7 +3,9 @@ import type { AnswerMap, FormId } from "./types";
 export const RUN_KEY = "ai-fluency-run-v1";
 
 export interface StoredRun {
-  form: FormId;
+  mode?: "adaptive";
+  form?: FormId;
+  itemIds?: string[];
   answers: AnswerMap;
   finishedAt: string;
 }
@@ -29,11 +31,15 @@ export function loadRun(): StoredRun | null {
     if (
       typeof parsed === "object" &&
       parsed !== null &&
-      "form" in parsed &&
       "answers" in parsed
     ) {
       const r = parsed as StoredRun;
-      if ((r.form === "A" || r.form === "B") && typeof r.answers === "object") {
+      if (
+        typeof r.answers === "object" &&
+        ((r.mode === "adaptive" && Array.isArray(r.itemIds)) ||
+          r.form === "A" ||
+          r.form === "B")
+      ) {
         return r;
       }
     }

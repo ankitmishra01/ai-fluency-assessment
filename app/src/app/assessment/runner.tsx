@@ -1,209 +1,106 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useCallback, useMemo, useState } from "react";
-import { DIMENSIONS, dimensionCounts, getForm } from "@/lib/scoring";
+import { useCallback, useState } from "react";
+import {
+  ADAPTIVE_ITEM_COUNT,
+  createAdaptiveSession,
+  recordAdaptiveAnswer,
+  type AdaptiveSession,
+} from "@/lib/adaptive";
+import { bankItem } from "@/lib/item-bank";
+import { DIMENSIONS } from "@/lib/scoring";
 import { saveRun } from "@/lib/storage";
-import type { AnswerMap, FormId } from "@/lib/types";
 
 const DIM_NAME: Record<string, string> = Object.fromEntries(
-  DIMENSIONS.map((d) => [d.key, d.name]),
+  DIMENSIONS.map((dimension) => [dimension.key, dimension.name]),
 );
 
 export function Runner() {
   const router = useRouter();
-  const [form, setForm] = useState<FormId | null>(null);
-  const [index, setIndex] = useState(0);
-  const [answers, setAnswers] = useState<AnswerMap>({});
+  const [session, setSession] = useState<AdaptiveSession | null>(null);
+  const [selected, setSelected] = useState<string | null>(null);
 
-  const items = useMemo(() => (form ? getForm(form).items : []), [form]);
-  const current = items[index];
+  const submit = useCallback(() => {
+    if (!session || !selected) return;
+    const updated = recordAdaptiveAnswer(session, selected);
+    if (updated.complete) {
+      saveRun({
+        mode: "adaptive",
+        itemIds: updated.administered,
+        answers: updated.answers,
+        finishedAt: new Date().toISOString(),
+      });
+      router.push("/results");
+      return;
+    }
+    setSession(updated);
+    setSelected(null);
+  }, [router, selected, session]);
 
-  const choose = useCallback(
-    (itemId: string, key: string) => {
-      setAnswers((a) => ({ ...a, [itemId]: key }));
-    },
-    [],
-  );
-
-  const finish = useCallback(() => {
-    if (!form) return;
-    saveRun({ form, answers, finishedAt: new Date().toISOString() });
-    router.push("/results");
-  }, [answers, form, router]);
-
-  if (!form) {
-    return <Picker onPick={setForm} />;
+  if (!session) {
+    return <AdaptiveIntro onStart={() => setSession(createAdaptiveSession())} />;
   }
 
+  const current = bankItem(session.currentItemId);
   if (!current) return null;
-
-  const answered = Object.keys(answers).length;
-  const last = index === items.length - 1;
-  const scenario = getForm(form).scenario;
+  const number = session.administered.length + 1;
 
   return (
     <div className="q-shell">
-      <h1 className="sr-h1">Form {form}</h1>
+      <h1 className="sr-h1">Adaptive AI fluency assessment</h1>
       <div className="progress">
         <div className="progress-head">
-          <span>
-            Form {form} · <strong>Question {index + 1}</strong> of{" "}
-            {items.length}
-          </span>
-          <span>
-            {DIM_NAME[current.section]} · {answered} answered
-          </span>
+          <span><strong>Question {number}</strong> of {ADAPTIVE_ITEM_COUNT}</span>
+          <span>{DIM_NAME[current.section]} · Adaptive path</span>
         </div>
-        <div
-          className="bar"
-          role="progressbar"
-          aria-valuenow={index + 1}
-          aria-valuemin={1}
-          aria-valuemax={items.length}
-          aria-label="Progress through the assessment"
-        >
-          <div style={{ width: `${((index + 1) / items.length) * 100}%` }} />
+        <div className="bar" role="progressbar" aria-valuenow={number} aria-valuemin={1} aria-valuemax={ADAPTIVE_ITEM_COUNT} aria-label="Progress through the assessment">
+          <div style={{ width: `${(number / ADAPTIVE_ITEM_COUNT) * 100}%` }} />
         </div>
       </div>
 
-      {current.section === "case" && (
-        <div className="scenario">
-          <h3>{scenario.title}</h3>
-          <p>{scenario.body}</p>
-        </div>
-      )}
-
       <div className="q-card">
-        <p className="panel-index" style={{ margin: 0 }}>
-          {DIM_NAME[current.section]}
-        </p>
+        <p className="panel-index" style={{ margin: 0 }}>{DIM_NAME[current.section]}</p>
         <h2 className="q-text">{current.q}</h2>
         <div className="options" role="group" aria-label="Answer options">
-          {current.options.map((o) => {
-            const on = answers[current.id] === o.key;
-            return (
-              <button
-                type="button"
-                key={o.key}
-                className={on ? "opt on" : "opt"}
-                aria-pressed={on}
-                onClick={() => choose(current.id, o.key)}
-              >
-                <span className="k" aria-hidden="true">
-                  {o.key}
-                </span>
-                <span className="t">{o.text}</span>
-              </button>
-            );
-          })}
-        </div>
-
-        <div className="q-nav">
-          <button
-            type="button"
-            className="ghost"
-            onClick={() => setIndex((i) => Math.max(0, i - 1))}
-            disabled={index === 0}
-          >
-            Back
-          </button>
-          <span className="spacer" />
-          {last ? (
-            <button
-              type="button"
-              onClick={finish}
-              disabled={answered < items.length}
-            >
-              {answered < items.length
-                ? `${items.length - answered} left to answer`
-                : "See my result"}
+          {current.options.map((option) => (
+            <button type="button" key={option.key} className={selected === option.key ? "opt on" : "opt"} aria-pressed={selected === option.key} onClick={() => setSelected(option.key)}>
+              <span className="k" aria-hidden="true">{option.key}</span>
+              <span className="t">{option.text}</span>
             </button>
-          ) : (
-            <button
-              type="button"
-              onClick={() =>
-                setIndex((i) => Math.min(items.length - 1, i + 1))
-              }
-              disabled={!answers[current.id]}
-            >
-              Next question
-            </button>
-          )}
-        </div>
-
-        <div className="dots" aria-hidden="true">
-          {items.map((it, i) => (
-            <i
-              key={it.id}
-              className={
-                i === index ? "now" : answers[it.id] ? "done" : undefined
-              }
-            />
           ))}
+        </div>
+        <div className="q-nav adaptive-nav">
+          <span className="small muted">Your answer sets the difficulty of a later question in this dimension.</span>
+          <span className="spacer" />
+          <button type="button" onClick={submit} disabled={!selected}>Submit answer</button>
+        </div>
+        <div className="dots" aria-hidden="true">
+          {Array.from({ length: ADAPTIVE_ITEM_COUNT }, (_, index) => <i key={index} className={index === number - 1 ? "now" : index < number - 1 ? "done" : undefined} />)}
         </div>
       </div>
 
       <p className="small muted" style={{ marginTop: 12 }}>
-        No answer is marked right or wrong until you finish. Your responses stay
-        in this browser tab and are never sent anywhere.
+        Answers are final because each one determines your later item difficulty. Nothing is marked right or wrong until the end, and nothing leaves this browser tab.
       </p>
     </div>
   );
 }
 
-function Picker({ onPick }: { onPick: (f: FormId) => void }) {
-  const forms: FormId[] = ["A", "B"];
+function AdaptiveIntro({ onStart }: { onStart: () => void }) {
   return (
-    <>
-      <h1>Choose a form and begin</h1>
-      <p className="lede">
-        One item per screen, with progress shown. Nothing is marked right or
-        wrong until you submit, and you can go back to change an answer before
-        you do.
-      </p>
-      <div className="picker">
-        {forms.map((f) => {
-          const counts = dimensionCounts(f);
-          const total = Object.values(counts).reduce((a, b) => a + b, 0);
-          return (
-            <button
-              type="button"
-              key={f}
-              className="pick"
-              onClick={() => onPick(f)}
-            >
-              <strong>Form {f}</strong>
-              <span className="meta">
-                {total} items · {counts.technical} technical,{" "}
-                {counts.applied} applied, {counts.risk} risk-reward,{" "}
-                {counts.case} mini-case
-              </span>
-              <span className="meta">
-                Mini-case scenario:{" "}
-                {f === "A"
-                  ? "a retail customer-service chatbot"
-                  : "a logistics route-optimization pilot"}
-              </span>
-              <span className="go">Start form {f}</span>
-            </button>
-          );
-        })}
+    <section className="adaptive-intro">
+      <p className="eyebrow">Adaptive assessment · 32 questions</p>
+      <h1>The questions adjust to your demonstrated level.</h1>
+      <p className="lede">The assessment starts at medium difficulty in each dimension. Correct answers lead to harder questions; incorrect answers lead to easier ones. You will answer eight questions in each of four dimensions, selected from a 200-item bank.</p>
+      <div className="adaptive-facts" aria-label="Assessment format">
+        <div><strong>200</strong><span>items in the bank</span></div>
+        <div><strong>32</strong><span>items in your path</span></div>
+        <div><strong>4</strong><span>balanced dimensions</span></div>
+        <div><strong>20–25</strong><span>minutes</span></div>
       </div>
-      <div className="callout">
-        <p>
-          <strong>The two forms are parallel, not identical.</strong> They cover
-          the same four dimensions with different items, so the same person can
-          sit one now and the other later without simply remembering answers.
-          Scores are on the same 800-point scale, but the forms have not been
-          statistically equated, so a small difference between them should not
-          be read as real change.
-        </p>
-      </div>
-      <p className="small muted">
-        Roughly 20 to 30 minutes. There is no timer, nothing is marked mid-test,
-        and you can move back to change an answer before you submit.
-      </p>
-    </>
+      <div className="callout"><p><strong>Answers become final when submitted.</strong> Like other adaptive tests, changing an earlier response would change the questions selected afterward. There is no penalty for taking time to think.</p></div>
+      <button type="button" onClick={onStart}>Begin adaptive assessment</button>
+    </section>
   );
 }

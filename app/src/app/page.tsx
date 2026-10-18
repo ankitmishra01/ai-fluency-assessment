@@ -2,17 +2,12 @@ import Link from "next/link";
 import {
   BANDS,
   DIMENSIONS,
-  dimensionCounts,
   EXAMPLE_RESULT,
 } from "@/lib/scoring";
+import { ADAPTIVE_ITEM_COUNT } from "@/lib/adaptive";
+import { ITEM_BANK } from "@/lib/item-bank";
 
 export default function Home() {
-  const a = dimensionCounts("A");
-  const b = dimensionCounts("B");
-  const totalItems =
-    Object.values(a).reduce((x, y) => x + y, 0) +
-    Object.values(b).reduce((x, y) => x + y, 0);
-
   return (
     <main id="main-content" className="home-main">
       <section className="hero">
@@ -21,9 +16,9 @@ export default function Home() {
           <h1>What someone can actually do with AI, scored out of 800.</h1>
           <p className="hero-lede">
             Most AI readiness surveys measure confidence. This measures
-            judgment. Four dimensions, 200 points each, built on a pilot bank of{" "}
-            {totalItems} items written for working professionals rather than for
-            engineers.
+            judgment. Four dimensions, 200 points each, built on an adaptive
+            bank of {ITEM_BANK.length} items written for working professionals
+            rather than for engineers.
           </p>
           <div className="hero-actions">
             <Link href="/assessment" className="btn hero-cta">
@@ -40,13 +35,13 @@ export default function Home() {
           <ol className="sequence">
           <li>
             <span>01</span>
-            <strong>Pick a form</strong>
-            Two parallel forms, A and B, so the same person can be retested.
+            <strong>Start at medium difficulty</strong>
+            Every dimension begins at the middle of a five-level difficulty range.
           </li>
           <li>
             <span>02</span>
-            <strong>Answer</strong>
-            One item per screen. Nothing is marked right or wrong mid-test.
+            <strong>Follow an adaptive path</strong>
+            Correct answers lead to harder items; incorrect answers lead to easier ones.
           </li>
           <li>
             <span>03</span>
@@ -86,12 +81,12 @@ export default function Home() {
           <strong>4 × 200</strong>
         </div>
         <div>
-          <span className="k">Form A</span>
-          <strong>{Object.values(a).reduce((x, y) => x + y, 0)} items</strong>
+          <span className="k">Item bank</span>
+          <strong>{ITEM_BANK.length} questions</strong>
         </div>
         <div>
-          <span className="k">Form B</span>
-          <strong>{Object.values(b).reduce((x, y) => x + y, 0)} items</strong>
+          <span className="k">Your path</span>
+          <strong>{ADAPTIVE_ITEM_COUNT} questions</strong>
         </div>
       </div>
 
@@ -104,16 +99,15 @@ export default function Home() {
         <div className="card">
           <h2>Every dimension is worth the same</h2>
           <p className="muted">
-            A dimension score is the share of its items answered correctly,
-            multiplied by 200 and rounded. The four dimension scores add up to
-            the headline figure out of 800.
+            Each adaptive response contributes according to whether it is
+            correct and the difficulty of the item. Eight questions are
+            delivered in each dimension, and each dimension remains worth 200
+            points.
           </p>
           <p className="muted" style={{ marginBottom: 0 }}>
-            Sections hold different numbers of items, so a dimension built from
-            four mini-case items weighs exactly as much as one built from ten
-            technical items. That is a deliberate choice: the four capabilities
-            matter equally for the work, even though they are not equally easy
-            to write items for.
+            This is a transparent pilot algorithm, not a calibrated item-response
+            model. The item bank needs response data before difficulty estimates
+            and score precision can be statistically validated.
           </p>
         </div>
         <div className="card">

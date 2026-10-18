@@ -1,4 +1,4 @@
-import { FORMS } from "./items";
+import { FORMS } from "./items.ts";
 import type {
   AnswerMap,
   BandName,
@@ -8,7 +8,7 @@ import type {
   FormId,
   Item,
   Result,
-} from "./types";
+} from "./types.ts";
 
 export const DIMENSION_MAX = 200;
 export const TOTAL_MAX = 800;

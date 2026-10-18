@@ -4,7 +4,7 @@ import { Runner } from "./runner";
 export const metadata: Metadata = {
   title: "Assessment · AI Fluency Assessment",
   description:
-    "Pick a form and answer the items one screen at a time. Nothing is marked right or wrong mid-test.",
+    "Take a 32-question adaptive assessment selected from a 200-item workplace AI fluency bank.",
 };
 
 export default function AssessmentPage() {

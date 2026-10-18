@@ -1,7 +1,7 @@
 # AI Fluency Assessment
 
-A prototype AI fluency assessment for workplace learning and development: two
-parallel forms, four dimensions, and a score out of 800. Results include an
+A prototype adaptive AI fluency assessment for workplace learning and development:
+a 200-item bank, a 32-question adaptive path, four dimensions, and a score out of 800. Results include an
 evidence-led capability profile and a printable six-week learning plan generated
 from the employee's two lowest-scoring dimensions.
 
@@ -12,19 +12,21 @@ Built by Ankit Mishra. Pilot item bank, illustrative scoring bands, not a valida
 ## Layout
 
 - `app/` — Next.js App Router application (TypeScript). This is the Vercel root directory.
-- `app/src/lib/items.ts` — generated item bank. Do not edit by hand.
-- `app/src/lib/scoring.ts` — dimensions, bands and the scoring arithmetic.
+- `app/src/lib/item-bank.ts` — 200-item adaptive workplace question bank.
+- `app/src/lib/adaptive.ts` — adaptive routing and difficulty-aware scoring.
+- `app/src/lib/scoring.ts` — dimensions, bands, and legacy-form compatibility.
 - `tools/parse_docx.py` — parses the source `.docx` test documents into `parsed.json`.
 - `tools/emit_items.py` — turns `parsed.json` into the typed `items.ts`.
 
-## Regenerating the item bank
+## Source-form archive
 
 ```
 python3 tools/parse_docx.py "<Test 1 .docx>" "<Test 2 .docx>" parsed.json
 python3 tools/emit_items.py parsed.json app/src/lib/items.ts
 ```
 
-The parser reports any block it could not turn into an item. Two source defects are
+The original 67-item parallel-form bank remains in `app/src/lib/items.ts` for
+backward compatibility with older browser sessions. The parser reports any block it could not turn into an item. Two source defects are
 handled explicitly: one item whose options are mislabelled (A, C, C, D) is relabelled by
 position, and one double-keyed item is excluded by the `EXCLUDE` list in `emit_items.py`.
 

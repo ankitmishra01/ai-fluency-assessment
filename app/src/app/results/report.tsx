@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { scoreAdaptive } from "@/lib/adaptive";
+import { bankItem } from "@/lib/item-bank";
 import { BANDS, bandNote, DIMENSION_MAX, getForm, TOTAL_MAX, score } from "@/lib/scoring";
 import { clearRun, loadRun, type StoredRun } from "@/lib/storage";
 import type { DimensionScore, Result } from "@/lib/types";
@@ -45,8 +47,13 @@ export function Report() {
 }
 
 function Scored({ run }: { run: StoredRun }) {
-  const result = score(run.form, run.answers);
-  const items = getForm(run.form).items;
+  const adaptive = run.mode === "adaptive" && Boolean(run.itemIds);
+  const result = adaptive
+    ? scoreAdaptive(run.itemIds!, run.answers)
+    : score(run.form!, run.answers);
+  const items = adaptive
+    ? run.itemIds!.map((id) => bankItem(id)).filter((item) => Boolean(item))
+    : getForm(run.form!).items;
   const priorities = [...result.dimensions].sort((a, b) => a.score - b.score).slice(0, 2);
 
   return (
@@ -58,7 +65,7 @@ function Scored({ run }: { run: StoredRun }) {
           <span className="score">{result.total}</span><span className="outof">out of {TOTAL_MAX}</span>
           <h2 id="result-level">{LEVEL_LABELS[result.band]}</h2>
           <p>{bandNote(result.band)}</p>
-          <span className="result-basis">Form {run.form} · {result.correct} of {result.items} scenarios correct</span>
+          <span className="result-basis">{adaptive ? "Adaptive path" : `Form ${run.form}`} · {result.correct} of {result.items} scenarios correct</span>
         </div>
         <div className="result-interpretation">
           <p className="eyebrow">What this result says</p>
@@ -98,16 +105,17 @@ function Scored({ run }: { run: StoredRun }) {
         <summary><span><strong>Review how your score was calculated</strong><small>See every question, your answer, and the keyed answer</small></span><span aria-hidden="true">Expand</span></summary>
         <div className="review">
           {items.map((it, i) => {
+            if (!it) return null;
             const chosen = run.answers[it.id];
             const correct = chosen === it.answer;
             const chosenText = it.options.find((o) => o.key === chosen)?.text;
             const answerText = it.options.find((o) => o.key === it.answer)?.text;
-            return <div className="rev" key={it.id}><div className="rev-top"><span>Q{i + 1}</span><span className="pill dim">{result.dimensions.find((d) => d.key === it.section)?.name}</span><span className={correct ? "pill ok" : "pill no"}>{correct ? "Correct" : "Incorrect"}</span></div><p className="rev-q">{it.q}</p><dl className="rev-a"><dt>You chose</dt><dd>{chosen ? `${chosen}. ${chosenText}` : "No answer recorded"}</dd>{!correct && <><dt>Keyed answer</dt><dd>{it.answer}. {answerText}</dd></>}</dl></div>;
+            return <div className="rev" key={it.id}><div className="rev-top"><span>Q{i + 1}</span><span className="pill dim">{result.dimensions.find((d) => d.key === it.section)?.name}</span>{adaptive && <span className="pill dim">Difficulty {it.difficulty}/5</span>}<span className={correct ? "pill ok" : "pill no"}>{correct ? "Correct" : "Incorrect"}</span></div><p className="rev-q">{it.q}</p><dl className="rev-a"><dt>You chose</dt><dd>{chosen ? `${chosen}. ${chosenText}` : "No answer recorded"}</dd>{!correct && <><dt>Keyed answer</dt><dd>{it.answer}. {answerText}</dd></>}</dl></div>;
           })}
         </div>
       </details>
 
-      <div className="q-nav result-actions"><Link href="/assessment" className="btn ghost" onClick={() => clearRun()}>Take the other form</Link><Link href="/methodology" className="btn ghost">How this was scored</Link></div>
+      <div className="q-nav result-actions"><Link href="/assessment" className="btn ghost" onClick={() => clearRun()}>Take a new adaptive path</Link><Link href="/methodology" className="btn ghost">How this was scored</Link></div>
     </>
   );
 }

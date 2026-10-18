@@ -362,6 +362,17 @@ main { max-width: 1240px; padding: 40px var(--space-page) 72px; }
 .methodology-nav a:hover { color: var(--accent-text); background: var(--card); }
 .methodology-page h2[id] { scroll-margin-top: 140px; }
 .q-shell { max-width: 900px; }
+.adaptive-intro { max-width: 900px; padding: clamp(28px, 5vw, 54px) 0; }
+.adaptive-intro h1 { max-width: 760px; font-family: var(--font-serif), Georgia, serif; font-size: clamp(38px, 6vw, 62px); line-height: 1.02; }
+.adaptive-intro .lede { max-width: 780px; font-size: 18px; }
+.adaptive-facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 30px 0; border-block: 1px solid var(--rule); }
+.adaptive-facts div { display: grid; gap: 3px; padding: 18px; }
+.adaptive-facts div + div { border-left: 1px solid var(--line-strong); }
+.adaptive-facts strong { font-family: var(--font-serif), Georgia, serif; font-size: 30px; font-weight: 500; }
+.adaptive-facts span { color: var(--muted); font-size: 12px; }
+.adaptive-intro .callout { max-width: 760px; margin-bottom: 22px; }
+.adaptive-nav { align-items: center; }
+.adaptive-nav > .small { max-width: 390px; }
 .q-card { padding: clamp(20px, 4vw, 34px); border-top-width: 4px; }
 .q-text { max-width: 760px; font-size: clamp(20px, 2.5vw, 26px); line-height: 1.25; }
 .options { gap: 10px; }
@@ -426,6 +437,10 @@ main { max-width: 1240px; padding: 40px var(--space-page) 72px; }
   .closing-cta { align-items: stretch; flex-direction: column; }
   .closing-cta .btn { width: 100%; }
   .opt { min-height: 62px; }
+  .adaptive-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .adaptive-facts div:nth-child(3) { border-left: 0; }
+  .adaptive-facts div:nth-child(n+3) { border-top: 1px solid var(--line-strong); }
+  .adaptive-nav > .small { display: none; }
 }
 
 /* ---------- evidence-led results ---------- */

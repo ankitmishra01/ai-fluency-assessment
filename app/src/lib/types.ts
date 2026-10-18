@@ -12,6 +12,7 @@ export interface Option {
 export interface Item {
   id: string;
   section: string;
+  difficulty?: 1 | 2 | 3 | 4 | 5;
   q: string;
   options: Option[];
   answer: string;
@@ -36,7 +37,7 @@ export interface DimensionScore {
 }
 
 export interface Result {
-  form: FormId;
+  form: FormId | "Adaptive";
   total: number;
   band: BandName;
   correct: number;
