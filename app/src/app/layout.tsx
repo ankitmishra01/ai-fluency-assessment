@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Source_Sans_3, Source_Serif_4 } from "next/font/google";
-import { Footer, Header } from "./chrome";
+import { Shell } from "./chrome";
 import "./globals.css";
 
 const sans = Source_Sans_3({
@@ -34,10 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${sans.variable} ${serif.variable}`}>
-        <a className="skip-link" href="#main-content">Skip to main content</a>
-        <Header />
-        {children}
-        <Footer />
+        <Shell>{children}</Shell>
       </body>
     </html>
   );
